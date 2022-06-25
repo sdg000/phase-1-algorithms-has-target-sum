@@ -1,18 +1,23 @@
-const myArray = [3, 8, 12, 4, 11, 7]
-
-let targetInt = 10
+// iterate through array, find difference btn target number and array elements. 
+// if difference exist in array, return true. after iterating through all numbers, if difference not in array, return false
+// for every number checked, push number into checkedNumber object
+  
+//Runtime O(n)
 
 function hasTargetSum(array, target){
-  for(i = 0; i < array.length; i++){
-    for (j = i+1; j < array.length; j++){
-      if (array[i] + array[j] === target){
-        return true
-      }
-    }
+  const checkedNumbers = {}
+
+  for (const item of array){
+    const difference = target - item
+    if (difference in checkedNumbers) return true
+    checkedNumbers[item] = true  
   }
   return false
 }
-hasTargetSum(myArray, targetInt)
+
+
+  
+//hasTargetSum(myArray, targetInt)
 
 /* 
   Write the Big O time complexity of your function here
@@ -30,10 +35,11 @@ hasTargetSum(myArray, targetInt)
 
 /*
   Add written explanation of your solution here
-  use for...of: returns true for first two elemnents that sum up to target sum.
-
-  for every item in array, iterate through array adding each of the remainng element to it  and compare to the target sum
-  if addition of two array elements is equal to target sum, return true else false
+  write function that take(array and targetsum) as param
+  if sum of two elements of array is equal to targetsum variable, return true
+  Example sampleArray = [1, 2, 3, 4] , targetsum = 6, return true. bcos, 2 + 4 = 6 
+   
+  return false if no two elements of array sum up to the targetsum variable.  
 */
 
 // You can run `node index.js` to view these console logs
@@ -54,3 +60,49 @@ if (require.main === module) {
 }
 
 module.exports = hasTargetSum;
+
+//solution 2:  finding element arrays that add up to target.
+// runtime O(n^2)
+// spacetime: array structure to be stored in memory, targetVariable to be stored in memory.
+/*
+const myArray = [3, 8, 12, 4, 11, 7]
+let targetInt = 10
+
+function hasTargetSum(array, target){
+  for(i = 0; i < array.length; i++){
+    for (j = i+1; j < array.length; j++){
+      if (array[i] + array[j] === target){
+        return true
+      }
+    }
+  }
+  return false
+}
+
+hasTargetSum(myArray, targetInt)
+
+*/
+
+
+
+/*
+// solution 3. substracting array elements from target, if difference is in array, return true. else return false
+
+// O(n^2) runtime
+function hasTargetSum(array, target){
+  
+  for(i = 0; i < array.length; i++){
+    const difference = target - array[i]
+    
+    for (j = i+1; j < array.length; j++){
+      if(array[j] === difference){
+        return true
+      } 
+    }
+  }
+  return false
+}
+// Big O : Runtime => O(n^2) , n steps for first loop, another n steps for nested loop
+// Big ) : Spacetime => O(n), only 1 array is being created and will require for storage.
+
+*/
