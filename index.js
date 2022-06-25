@@ -1,15 +1,19 @@
 // iterate through array, find difference btn target number and array elements. 
-// if difference exist in array, return true. after iterating through all numbers, if difference not in array, return false
-// for every number checked, push number into checkedNumber object
+// as you iterate, store checked numbers in object (set), so we dont iterate over all elements again, move on to next number in array
+// if current number being checked in array, has a complement in the object (numbers already checked ?), return true
+// add the current item being checked back to the object .
+// after iterating or checking all numbers in array, if no 2 complementing numbers are found, return false.
   
-//Runtime O(n)
+//Runtime O(n) (n steps for 1st loop, n step for finding complement of every item in array, n steps for 2nd 'if')
+//Spacetime O(n) : array memory grows as size of array grows linearly. use js method - Set() to store keys
+//
 
 function hasTargetSum(array, target){
-  const checkedNumbers = {}
+  const checkedNumbers = new Set()
 
   for (const item of array){
-    const difference = target - item
-    if (difference in checkedNumbers) return true
+    const complement = target - item
+    if (complement in checkedNumbers) return true
     checkedNumbers[item] = true  
   }
   return false
